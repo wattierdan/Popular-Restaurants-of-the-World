@@ -30,7 +30,7 @@ function initMap() {
         keyword: foodType,
         rating: 5
     };
-    console.log(request)
+    
     infoWindow = new google.maps.InfoWindow()
     
     var service = new google.maps.places.PlacesService(map)
@@ -57,7 +57,10 @@ function initMap() {
             //console logs place object
             console.log(place)
             //display name of this resaurant
-            infoWindow.setContent(place.name + "<p>this is a place to display all info about a resaurant</p>")
+            infoWindow.setContent(place.name + "<p>" + 
+                place.business_status + "</p>" + 
+                "<p>" + "Rating: " + place.rating + "</p>" +
+                "<p>this is a place to display all info about a resaurant</p>")
             infoWindow.open(map, this)
         })
     }
