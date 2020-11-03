@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Popular Restaurants of the World</title>
+    <meta name="viewport" content="initial-scale=1.0">
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="./assets/style.css">
+  </head>
+  <body> 
+    <div id="map">   
+    </div>
+    <form>
+        <input id="location" type="text" placeholder="city/location">
+        <input id="foodType" type="text" placeholder="type of food">
+        <button id="search" type="submit">search</button>
+    </form>
+    
+    <!--google maps with places library-->
+    <script defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDuD7uhRf2B88H4rdS3LPR7JYbZSUlQnCI&libraries=places&callback=initMap"></script>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="./assets/script.js"></script>
+  </body>
+</html>
