@@ -1,5 +1,5 @@
 //zomato variables
-var zomatoURL = "https://developers.zomato.com/api/v2.1/search?count=10$"
+var zomatoURL = "https://developers.zomato.com/api/v2.1/search?"
 var zomatoKey = "121bbb71dd9ca77169dfb8af142d6e46"
 
 
@@ -13,6 +13,23 @@ var latitude = 38.5816
 var longitude = -121.4944
 //globally delcaring variable
 var infoWindow
+var restaurantsArray = []
+var zomatoArray = []
+var results
+
+//compare results
+function compareArrays(arr1, arr2) {
+    console.log(arr1.length, arr2.length)
+    for (var i = 0; i < arr2.length; i++){
+        for (var j = 0; j < arr2.length; j++) {
+                if(arr2[i] === arr2[j]){
+                    console.log(arr2[j])
+               }
+        }
+    }
+}
+
+
 
 
 //map loads
@@ -41,10 +58,14 @@ function initMap() {
         if (status == google.maps.places.PlacesServiceStatus.OK) {
         for (var i = 0; i < results.length; i++) {
             createMarker(results[i]);
+            restaurantsArray.push(results[i].name)
+            
         }
         }
     }
 
+    
+    console.log(restaurantsArray)
     //creates a new marker 
     function createMarker(place) {
         var placeLoc = place.geometry.location 
@@ -55,7 +76,7 @@ function initMap() {
         //when a marker is clicked
         google.maps.event.addListener(marker, 'click', function(){
             //console logs place object
-            console.log(place)
+            //console.log(place)
             //display name of this resaurant
             infoWindow.setContent(place.name + "<p>" + "<p>" + place.vicinity + "</p>" +
                 place.business_status + "</p>" + 
@@ -65,12 +86,14 @@ function initMap() {
         })
     }
 
+    callback(results, status)
+
 }
 
 //on click user input geocoded and latidtude and longitude variables reset
 $('#search').on('click', function(e){
     e.preventDefault()
-    console.log(latitude, longitude)
+    
     aPlace = $('#location').val().trim()
     foodType = $('#foodType').val().trim()
     $.ajax({
@@ -81,37 +104,31 @@ $('#search').on('click', function(e){
         longitude = response.results[0].geometry.location.lng
     //updates map with new lat lng and new markers
     initMap()
+    console.log(restaurantsArray, zomatoArray  + "1")
+    
+            var locSearch =  "&lat=" + latitude + "&lon=" + longitude
+            var wholeURL = zomatoURL + locSearch
+
+        $.ajax({
+            url: zomatoURL + locSearch,
+            method: "get",
+            headers: {
+                "user-key": zomatoKey
+            }
+            }).then(function(response) {
+                
+                for (var i = 0; i < response.restaurants.length; i++){
+                zomatoArray.push(response.restaurants[i].restaurant.name)
+                }
+                compareArrays(restaurantsArray, zomatoArray)
+        });
+    
     });
 
-
-//test
-
-
-
-
-/*
-setTimeout(function(){
     
-    var locSearch =  "&lat=" + latitude + "&lon=" + longitude
 
-var wholeURL = zomatoURL + locSearch
-console.log(locSearch)
-$.ajax({
-    url: zomatoURL + locSearch,
-    method: "get",
-    headers: {
-        "user-key": zomatoKey
-      }
-}).then(function(response) {
-    console.log(latitude, longitude)   
-for (var i = 0; i < response.restaurants.length; i++){
-    console.log(response.restaurants[i])
-    console.log("lat: " + response.restaurants[i].restaurant.location.latitude + 
-    " lng: " + response.restaurants[i].restaurant.location.longitude)  
-}
-});
-}, 1000)
-*/
+
+
 });
 
 
