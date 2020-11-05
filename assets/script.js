@@ -22,15 +22,12 @@ function compareArrays(arr1, arr2) {
     console.log(arr1.length, arr2.length)
     for (var i = 0; i < arr2.length; i++){
         for (var j = 0; j < arr2.length; j++) {
-                if(arr2[i] === arr2[j]){
+                if(arr1[i] === arr2[j]){
                     console.log(arr2[j])
                }
         }
     }
 }
-
-
-
 
 //map loads
 function initMap() {
@@ -65,7 +62,7 @@ function initMap() {
     }
 
     
-    console.log(restaurantsArray)
+   
     //creates a new marker 
     function createMarker(place) {
         var placeLoc = place.geometry.location 
@@ -93,6 +90,8 @@ function initMap() {
 //on click user input geocoded and latidtude and longitude variables reset
 $('#search').on('click', function(e){
     e.preventDefault()
+    restaurantsArray = []
+    zomatoArray = []
     
     aPlace = $('#location').val().trim()
     foodType = $('#foodType').val().trim()
@@ -104,7 +103,7 @@ $('#search').on('click', function(e){
         longitude = response.results[0].geometry.location.lng
     //updates map with new lat lng and new markers
     initMap()
-    console.log(restaurantsArray, zomatoArray  + "1")
+    
     
             var locSearch =  "&lat=" + latitude + "&lon=" + longitude
             var wholeURL = zomatoURL + locSearch
@@ -116,9 +115,8 @@ $('#search').on('click', function(e){
                 "user-key": zomatoKey
             }
             }).then(function(response) {
-                
                 for (var i = 0; i < response.restaurants.length; i++){
-                zomatoArray.push(response.restaurants[i].restaurant.name)
+                    zomatoArray.push(response.restaurants[i].restaurant.name)
                 }
                 compareArrays(restaurantsArray, zomatoArray)
         });
