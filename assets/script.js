@@ -1,6 +1,6 @@
 //zomato variables
-//var zomatoURL = "https://developers.zomato.com/api/v2.1/search?count=10$"
-//var zomatoKey = "121bbb71dd9ca77169dfb8af142d6e46"
+var zomatoURL = "https://developers.zomato.com/api/v2.1/search?count=10$"
+var zomatoKey = "121bbb71dd9ca77169dfb8af142d6e46"
 
 
 var mapsURL = "https://maps.googleapis.com/maps/api/geocode/json?address=" 
@@ -28,7 +28,7 @@ function initMap() {
         radius: '8000',
         type: ['restaurant'],
         keyword: foodType,
-        rating: 5
+        rating: 4 
     };
     
     infoWindow = new google.maps.InfoWindow()
@@ -57,7 +57,7 @@ function initMap() {
             //console logs place object
             console.log(place)
             //display name of this resaurant
-            infoWindow.setContent(place.name + "<p>" + 
+            infoWindow.setContent(place.name + "<p>" + "<p>" + place.vicinity + "</p>" +
                 place.business_status + "</p>" + 
                 "<p>" + "Rating: " + place.rating + "</p>" +
                 "<p>this is a place to display all info about a resaurant</p>")
@@ -84,15 +84,14 @@ $('#search').on('click', function(e){
     });
 
 
-
-
+//test
 
 
 
 
 /*
-zomato function
 setTimeout(function(){
+    
     var locSearch =  "&lat=" + latitude + "&lon=" + longitude
 
 var wholeURL = zomatoURL + locSearch
@@ -106,7 +105,7 @@ $.ajax({
 }).then(function(response) {
     console.log(latitude, longitude)   
 for (var i = 0; i < response.restaurants.length; i++){
-    console.log(response.restaurants[i].restaurant.name)
+    console.log(response.restaurants[i])
     console.log("lat: " + response.restaurants[i].restaurant.location.latitude + 
     " lng: " + response.restaurants[i].restaurant.location.longitude)  
 }
