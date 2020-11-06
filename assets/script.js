@@ -19,6 +19,19 @@ var zomatoArray = []
 var results
 var zomatoData = []
 var image = "./assets/imgs/Restaurantforkandknifefreeicon2.png"
+//styles for map
+var stylesArray = [
+    {
+        featureType: "poi",
+        elementType: "labels.icon",
+        stylers: [{ visibility: "off" }],
+    },
+    {
+        featureType: "poi.park",
+        elementType: "labels.text.fill",
+        stylers: [{ visibility: "on" }],
+      },
+  ]
 
 //compare results
 function compareArrays(arr1, arr2) {
@@ -74,7 +87,9 @@ function zomatoCall() {
 function initMap() {
     var map = new google.maps.Map(document.getElementById('map'), {
         center: {lat: latitude, lng: longitude},
+        styles: stylesArray,
         zoom: 13
+        
     });
     //creates search params
     var request = {
@@ -108,9 +123,7 @@ function initMap() {
             position: {lat: place.latitude, lng: place.longitude},
             icon: image
         })
-
         google.maps.event.addListener(marker, 'click', function(){
-            
             infoWindow.setContent(
                "<p>" + place.name + "</p>" +
                "<p>" + place.cost + "</p>" +
@@ -119,16 +132,12 @@ function initMap() {
                "<p>" + place.phone + "</p>" +
                "<p>" + place.timings + "</p>" +
                "<img src=" + place.photo + ">" +
-               
                "<p>this is a place to display all info about a resaurant</p>")
             infoWindow.open(map, this)
         })
     }
 
-
-    
     //creates a new google marker 
-    
     function createMarker(place) {
         console.log('hey')
         var placeLoc = place.geometry.location 
@@ -136,8 +145,6 @@ function initMap() {
             map: map,
             position: place.geometry.location,
             icon: image,
-            
-           
         })
         
         //when a marker is clicked
@@ -149,16 +156,13 @@ function initMap() {
                 "<p>this is a place to display all info about a resaurant</p>")
             infoWindow.open(map, this)
         })
-
-        
-
     }
 
-        zomatoCall()
+    zomatoCall()
         //times out to wait for return of zomato call
-        setTimeout(function(){
+    setTimeout(function(){
             displayZomatoMarker()
-        }, 2000)
+    }, 2000)
 
     callback(results, status)
 
@@ -169,33 +173,26 @@ function initMap() {
         }
         //reset zomato data
         zomatoData = []
-    }
-    
+    } 
 }
 
 //on click user input geocoded and latidtude and longitude variables reset
 $('#search').on('click', function(e){
-
             e.preventDefault()
             console.log(zomatoData)
             restaurantsArray = []
             zomatoArray = []
-            
             aPlace = $('#location').val().trim()
             foodType = $('#foodType').val().trim()
             console.log(foodType)
-            
             $.ajax({
                 url: mapsURL + aPlace + GoogleKey,
                 method: "get"
             }).then(function(response) {
                 latitude = response.results[0].geometry.location.lat
                 longitude = response.results[0].geometry.location.lng
-                
-                
                 //updates map with new lat lng and new markers
-                initMap()
-                
+                initMap()     
             });
 });
 
