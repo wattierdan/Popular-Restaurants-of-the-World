@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="assets/style.css">
+    <style type="text/css">
+    body{
+        background-image:url(https://images.pexels.com/photos/4609201/pexels-photo-4609201.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260);
+        background-size: cover;
+        background-attachment: fixed;
+    }
+    .content{background: white;
+    width: 50%;
+    padding: 40px;
+    margin: 100px auto;
+    font-family: sans-serif;
+    }
+
+</style>
+    <title>HomePage</title>
+</head>
+<body>
+    <header>    
+        <div id="map">   
+    </div>
+    <form>
+        <input id="location" type="text" placeholder="city/location">
+        <input id="foodType" type="text" placeholder="type of food">
+        <button id="search" href="results.html" type="submit">search</button>
+    </form>
+    <!--google maps with places library-->
+    <script defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDuD7uhRf2B88H4rdS3LPR7JYbZSUlQnCI&libraries=places&callback=initMap"></script>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="./assets/script.js"></script>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="Coverpage.html">PRoW</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+            <ul class="navbar-nav justify-content-end">
+                <li class="nav-item">
+                    <a class="nav-link" href="reviews.html"><button type="button" class="primary button expanded search-button">
+                        <i class="fa fa-search"></i>Reviews</button></a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    </header>
+
+    <br>
+    <main id="myMain"class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h1>Description</h1>
+                        <hr>
+                            <p> Let me tell you the story about a few guys who got hungry and decided to scour the globe, 
+                                in search of the best bite to eat. </p>
+                    </div>
+                  </div>
+            </div>
+        </div>
+    </main>
+</body>
+</html>
