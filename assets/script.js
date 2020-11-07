@@ -19,6 +19,7 @@ var zomatoArray = []
 var results
 var zomatoData = []
 var image = "./assets/imgs/Restaurantforkandknifefreeicon2.png"
+var savedCities = []
 //styles for map
 var stylesArray = [
     {
@@ -33,7 +34,23 @@ var stylesArray = [
       },
   ]
 
-//compare results
+getCities()
+
+//saves to local storage 
+function savecity() {
+    var str = JSON.stringify(savedCities)
+    localStorage.setItem("cities", str)
+}
+//get citys from local storage 
+function getCities() {
+    var str = localStorage.getItem('cities')
+    savedCities = JSON.parse(str)
+    if (!savedCities) {
+        savedCities = []
+    }
+}  
+
+//compare results and if duplicate delete from arr2
 function compareArrays(arr1, arr2) {
     console.log(arr1.length, arr2.length)
     for (var i = 0; i < arr2.length; i++){
@@ -163,6 +180,8 @@ function initMap() {
             displayZomatoMarker()
     }, 2000)
 
+    
+
     callback(results, status)
 
     function displayZomatoMarker() {
@@ -184,6 +203,8 @@ $('#search').on('click', function(e){
             aPlace = $('#location').val().trim()
             foodType = $('#foodType').val().trim()
             console.log(foodType)
+            savedCities.push(aPlace)
+            savecity()
             $.ajax({
                 url: mapsURL + aPlace + GoogleKey,
                 method: "get"
