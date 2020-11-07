@@ -1,7 +1,7 @@
 //zomato variables
 var zomatoURL = "https://developers.zomato.com/api/v2.1/search?&sort=rating&q="
 var zomatoKey = "121bbb71dd9ca77169dfb8af142d6e46"
-var radius = "&radius=5000"
+var radius = "&radius=80"
 //google variables
 var map
 var mapsURL = "https://maps.googleapis.com/maps/api/geocode/json?address=" 
@@ -19,6 +19,7 @@ var zomatoArray = []
 var results
 var zomatoData = []
 var image = "./assets/imgs/Restaurantforkandknifefreeicon2.png"
+var savedCities = []
 //styles for map
 var stylesArray = [
     {
@@ -33,16 +34,32 @@ var stylesArray = [
       },
   ]
 
-//compare results
+getCities()
+
+//saves to local storage 
+function savecity() {
+    var str = JSON.stringify(savedCities)
+    localStorage.setItem("cities", str)
+}
+//get citys from local storage 
+function getCities() {
+    var str = localStorage.getItem('cities')
+    savedCities = JSON.parse(str)
+    if (!savedCities) {
+        savedCities = []
+    }
+}  
+
+//compare results and if duplicate delete from arr2
 function compareArrays(arr1, arr2) {
     console.log(arr1.length, arr2.length)
     for (var i = 0; i < arr2.length; i++){
         for (var j = 0; j < arr2.length; j++) {
-                if(arr1[i] === arr2[j]){
-                    console.log(arr2[j])
+                if(arr1[i] === arr2[j].name){ 
+                    arr2.splice(j, 1)   
                }
         }
-    }
+    }   
 }
 
 //makes zomato call 2 times each time displaying the next 20 results so 40 results total
@@ -53,15 +70,15 @@ function zomatoCall() {
         var iteratedResults = "&start=" + h
         //zomato call
         $.ajax({
-            url: zomatoURL+ foodType + iteratedResults + locSearch  + radius,
+            url: zomatoURL+ foodType + iteratedResults + locSearch,
             method: "get",
             headers: {
                 "user-key": zomatoKey
             }
         }).then(function(response) {
             for (var i = 0; i < response.restaurants.length; i++){
-                        
-                //create an object for each resaurant with data 
+                    
+                //create a data object for each resaurant
                 var restuarantData = {
                     name: response.restaurants[i].restaurant.name,
                     cost: response.restaurants[i].restaurant.average_cost_for_two,
@@ -78,7 +95,8 @@ function zomatoCall() {
                 zomatoData.push(restuarantData)
                 zomatoArray.push(response.restaurants[i].restaurant.name)      
             }
-            compareArrays(restaurantsArray, zomatoArray)
+            compareArrays(restaurantsArray, zomatoData)
+            
         })      
     }
 }
@@ -88,8 +106,7 @@ function initMap() {
     var map = new google.maps.Map(document.getElementById('map'), {
         center: {lat: latitude, lng: longitude},
         styles: stylesArray,
-        zoom: 13
-        
+        zoom: 13  
     });
     //creates search params
     var request = {
@@ -139,7 +156,6 @@ function initMap() {
 
     //creates a new google marker 
     function createMarker(place) {
-        console.log('hey')
         var placeLoc = place.geometry.location 
         var marker = new google.maps.Marker({
             map: map,
@@ -159,10 +175,12 @@ function initMap() {
     }
 
     zomatoCall()
-        //times out to wait for return of zomato call
+        //time out to wait for return of zomato call
     setTimeout(function(){
             displayZomatoMarker()
     }, 2000)
+
+    
 
     callback(results, status)
 
@@ -179,12 +197,14 @@ function initMap() {
 //on click user input geocoded and latidtude and longitude variables reset
 $('#search').on('click', function(e){
             e.preventDefault()
-            console.log(zomatoData)
+            
             restaurantsArray = []
             zomatoArray = []
             aPlace = $('#location').val().trim()
             foodType = $('#foodType').val().trim()
             console.log(foodType)
+            savedCities.push(aPlace)
+            savecity()
             $.ajax({
                 url: mapsURL + aPlace + GoogleKey,
                 method: "get"
