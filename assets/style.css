@@ -1,16 +1,18 @@
 form {
     position: absolute; 
     top: 10px; 
-    left: 5px; 
+    right: 5px;
     z-index: 1;
 }
 
 
 #map {
-    height: 500px;
-    width: 500px;
-    right: 5px;
+    height: 100vh;
+    width: 100vw;
     position: absolute;
+    top: 0;
+    right: 0;
+   
   }
   
 
