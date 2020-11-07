@@ -1,3 +1,9 @@
+form {
+    position: absolute; 
+    top: 10px; 
+    left: 5px; 
+    z-index: 1;
+}
 
    p {
     color: rgb(238, 255, 0);
@@ -7,12 +13,19 @@
     opacity: 80%
   }
 
+#map {
+    height: 500px;
+    width: 500px;
+    right: 5px;
+    position: absolute;
+}
   h1 {
       color: yellow;
       font-family: sans-serif;
       background-color: turquoise;
       opacity: 85%
   }
+
 
   #map {float: right;
                  width:33%;
@@ -45,7 +58,7 @@
 
     #i {
         color: yellow;
-        
+
     }
     .nav-item {
         display: inline;
@@ -53,33 +66,33 @@
     }
 
   a[href] {
-  
+
     color: rgb(238, 255, 0);
-    
+
   }
 
   p.impact {
     font-family: Charcoal, sans-serif;
   }
-  
+
   .tabbed-search {
     background: none;
     border: none;
     position: relative;
     top: -59px;
   }
-  
+
   .tabbed-search-content {
     position: relative;
     top: -59px;
     background: #43403a;
     border: none;
-    
+
     @include breakpoint(small only) {
       padding-top: 20px;
       padding-bottom: 30px;
     }
-    
+
     label {
       font-weight: 700;
       font-size: 0.8em;
@@ -89,7 +102,7 @@
       color: lighten(#43403a, 35%);
       background: #43403a;
     }
-    
+
     input[type=text] {
       margin-top: 15px;
       background: darken(#43403a, 8%);
@@ -98,12 +111,12 @@
       border-radius: 3px;
       font-weight: 400;
       padding-left: 15px;
-      
+
       @include breakpoint(small only) {
         margin-top: 0px;
       }
     }
-    
+
     select {
       margin-top: 15px;
       background: darken(#43403a, 8%);
@@ -112,19 +125,19 @@
       border-radius: 3px;
       font-weight: 400;
       padding-left: 15px;
-      
+
       @include breakpoint(small only) {
         margin-top: 0px;
       }
     }
-    
+
     #button {
       padding-left: 0;
       padding-right: 0;
       border-radius: 3px;
       margin-top: 15px;
       color: turquoise;
-      
+
       @include breakpoint(small only) {
         margin-top: 0px;
-      }}
+      }} 
