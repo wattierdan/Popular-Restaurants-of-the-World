@@ -1,3 +1,4 @@
+
 /*styles nav bar used in foundation framework also*/
 .top-bar {
   background-color: rgba(74, 202, 174, 0.822);
@@ -57,6 +58,7 @@ font-weight: bold;
   transform: scale(.9);
 }
 
+
 /*home page bg*/
 .backgroundImage-1 {
   background-image: url("./imgs/Churrotruck.jpg");
@@ -113,6 +115,7 @@ input[type=text] {
   */
 }
 
+
 /*button stylezzz*/
 button {
   border: solid black 1px;
@@ -132,3 +135,5 @@ button:active {
   transform: scale(.9);
 
 }
+
+
