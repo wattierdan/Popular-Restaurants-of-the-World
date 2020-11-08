@@ -88,7 +88,7 @@ function initMap() {
     var map = new google.maps.Map(document.getElementById('map'), {
         center: {lat: latitude, lng: longitude},
         styles: stylesArray,
-        zoom: 13
+        zoom: 15
         
     });
     //creates search params
@@ -179,6 +179,10 @@ function initMap() {
 //on click user input geocoded and latidtude and longitude variables reset
 $('#search').on('click', function(e){
             e.preventDefault()
+            //scroll to map
+            $('html').animate({
+                scrollTop: $('.scroll').offset().top - 80
+            }, 800);
             console.log(zomatoData)
             restaurantsArray = []
             zomatoArray = []
