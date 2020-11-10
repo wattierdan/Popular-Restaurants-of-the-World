@@ -83,6 +83,9 @@ top: 0;
 left: 0;
 display: block;
 margin: 0;
+margin-right: auto;
+margin-left: auto;
+text-align: center;
 }
 
 /*styles reviews header*/
@@ -136,4 +139,43 @@ button:active {
 
 }
 
+input {
+  opacity: .5;
+  width: 50px;
 
+}
+
+.reviewbox {
+  width: 150px;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.row {
+  width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.form {
+    background: black;
+    color: white;
+    border-radius: 1em;
+    padding: 1em;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%) 
+}
+
+#container {
+  background-color: rgba(74, 202, 174, 0.822);
+  color: yellow;
+  text-shadow: black 2px 2px 2px;
+  font-weight: bold;
+  font-size: 24px;
+  margin-right: auto;
+  margin-left: auto;
+  text-align: center;
+}
