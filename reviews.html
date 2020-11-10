@@ -6,19 +6,27 @@
     <title>Reviews</title>
 </head>
 <body>
-    <div class = "reviews"></div>
-        <ol class = "reviews">
+    <div class = "reviews">
+        <ol class = "reviews"> Past Reviews
             <li id = "review1"></li>
             <li id = "review2"></li>
             <li id = "review3"></li>
             <li id = "review4"></li>   
         </ol>
+    </div>
     <div class = "new-review"></div>
-    <button id = "submit-review">Submit Review</button>
+        <form id = "review-form">
+            <label for="review-input"></label>
+            <input type="text" id ="review-input"><br>
+            <input id = "submit-review" type ="submit" value = "Submit Review">
+        </form>
+
+    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
     <script type = "text/javascript">
         var pastReviews = $("#reviews")
+
     </script>
 
     
