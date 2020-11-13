@@ -150,7 +150,6 @@ function initMap() {
                "<p>" + place.highlights + "</p>" +
                "<p>" + place.phone + "</p>" +
                "<p>" + place.timings + "</p>" +
-               "<img src=" + place.photo + ">" +
                "<p>this is a place to display all info about a resaurant</p>")
             infoWindow.open(map, this)
         })
@@ -205,10 +204,13 @@ $('#search').on('click', function(e){
                 scrollTop: $('.scroll').offset().top - 80
             }, 800);
             console.log(zomatoData)
-
             restaurantsArray = []
             zomatoArray = []
-            aPlace = $('#location').val().trim()
+            if ($('#location').val().trim() !== "") {
+                aPlace = $('#location').val().trim()
+            } else {
+                return
+            }
             foodType = $('#foodType').val().trim()
             console.log(foodType)
             savedCities.push(aPlace)

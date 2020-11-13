@@ -4,29 +4,38 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!--link for foundation framework-->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/css/foundation.min.css" integrity="sha256-ogmFxjqiTMnZhxCqVmcqTvjfe1Y/ec4WaRj/aQPvn+I=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/css/foundation.min.css">
+  
     <link rel="stylesheet" type="text/css" href="assets/style.css">
     <title>HomePage</title>
 </head>
 <body>
-    <header class="top-bar">    
-        <div class="top-bar-left">
-            <ul class="dropdown menu" data-dropdown-menu>
-              <li class="menu-text">Popular Restaurants of the World</li>
-                <li><a class="pageLinks" href="#home">Home</a></li>
-                <li><a class="pageLinks" href="#reviews">Reviews</a></li>
-            </ul>
-       </div>
-       <div class="top-bar-right">
-           <form>
-               <input id="location" type="text" placeholder="city/location">
-               <input id="foodType" type="text" placeholder="type of food">
-               <button id="search" href=".results" type="submit">search</button>
-           </form>
-       </div>
-    </header>
 
+    <nav class="top-bar topbar-responsive">
+        <div class="top-bar-title">
+          <span data-responsive-toggle="topbar-responsive" data-hide-for="large">
+            <button class="menu-icon" type="button" data-toggle></button>
+          </span>
+          <a class="topbar-responsive-logo" href="#"><strong>PROW</strong></a>
+        </div>
+        <div id="topbar-responsive" class="topbar-responsive-links">
+          <div class="top-bar-right">
+            <ul class="menu simple vertical medium-horizontal">
+              <li><a class="pageLinks" href="#home">Home</a></li>
+              <li><a class="pageLinks" href="#reviews">Reviews</a></li>
+              <li>
+                <form>
+                    <input id="location" type="text" placeholder="city/location">
+                    <input id="foodType" type="text" placeholder="type of food">
+                    <button id="search" href=".results" type="submit">search</button>
+                </form>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+      
+    <div class="title">Popular Restaurants of the World</div>
     <div  class="slogan-box">
         <p class="slogan">
         Let me tell you the story about a few guys who got hungry and decided to scour the globe in search of the best bite to eat. 
@@ -47,6 +56,7 @@
         </div>
 
 
+
         <div class = "row">
            <div class = "medium-12 columns">
               <label>User Review
@@ -65,10 +75,18 @@
         })
     </script>
 
+
     <!--google maps with places library-->
     <script defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDuD7uhRf2B88H4rdS3LPR7JYbZSUlQnCI&libraries=places&callback=initMap"></script>
-    
+    <!-- jquery -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!-- foundation -->
+    <script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/js/foundation.min.js" integrity="sha256-pRF3zifJRA9jXGv++b06qwtSqX1byFQOLjqa2PTEb2o=" crossorigin="anonymous"></script>
+    
     <script src="./assets/script.js"></script>
+    <!-- foundatin jquery call -->
+    <script>
+        $(document).foundation();
+      </script>
 </body>
 </html>

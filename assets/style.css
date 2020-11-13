@@ -1,5 +1,5 @@
 
-/*styles nav bar used in foundation framework also*/
+/*styles nav bar foundation code also*/
 .top-bar {
   background-color: rgba(74, 202, 174, 0.822);
   position: fixed;
@@ -13,8 +13,51 @@ ul.dropdown.menu {
   text-shadow: black 5px 5px 3px;
 }
 .menu-text {
-  font-size: 44px;
+  font-size: 40px;
 }
+
+form {
+  margin-bottom: 10px;
+}
+
+.menu {
+  background-color: transparent !important;
+}
+
+
+
+.topbar-responsive-logo {
+  padding-left: 10px;
+  color: yellow;
+  text-shadow: black 5px 5px 3px;
+  font-size: 30px;
+}
+
+button.menu-icon {
+  outline: none;
+  border: none;
+}
+
+/* styles the title */
+
+.title {
+  z-index: 10;
+  position: absolute;
+  width: 100%;
+  text-align: center;
+  margin-top: 20%;
+  
+  padding-left: 10%;
+  padding-right: 10%;
+  border-radius: 5px;
+  text-shadow: black 5px 5px 3px;
+  color: rgb(238, 255, 0);  
+  font-size: 4vw;
+  font-weight: bold;
+}
+
+
+
 
 /*styles home page slogan*/
 .slogan-box {
@@ -22,11 +65,12 @@ ul.dropdown.menu {
   position: absolute;
   width: 100%;
   text-align: center;
-  margin-top: 300px;
-  padding-left: 400px;
-  padding-right: 400px;
+  margin-top: 30%;
+  padding-left: 10%;
+  padding-right: 10%;
   border-radius: 5px;
 }
+
 .slogan {
   font-size: 2.5vw;
   background-color: rgba(0, 0, 0, 0.629);
@@ -47,6 +91,7 @@ color: rgb(238, 255, 0);
 text-shadow: black 2px 2px 2px;
 margin-top: 10px;
 font-weight: bold;
+font-size: 16px;
 }
 .pageLinks:hover{
   color: rgb(238, 255, 0);
@@ -125,6 +170,7 @@ button {
   padding: 10px;
   outline: none;
   border-radius: 3px;
+  display: inline;
   /*
   @include breakpoint(small only) {
   margin-top: 0px;
@@ -138,6 +184,26 @@ button:active {
   transform: scale(.9);
 
 }
+
+
+@media (max-width: 1000px) {
+.slogan {
+  font-size: 20px;
+}
+.slogan-box {
+   margin-top: 290px;
+}
+.title {
+  margin-top: 200px;
+  font-size: 24px;
+}
+}
+
+
+
+
+
+
 
 input {
   opacity: .5;
@@ -157,6 +223,7 @@ input {
   margin-left: auto;
   margin-right: auto;
 }
+
 
 .form {
     background: black;
