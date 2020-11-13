@@ -19,7 +19,7 @@ var zomatoArray = []
 var results
 var zomatoData = []
 var image = "./assets/imgs/Restaurantforkandknifefreeicon2.png"
-var savedCities = []
+
 //styles for map
 var stylesArray = [
     {
@@ -34,7 +34,14 @@ var stylesArray = [
       },
   ]
 
-getCities()
+function saveConditions() {
+  
+        if (savedCities.indexOf(aPlace) == -1) {
+
+            savedCities.push(aPlace)
+        }
+
+}
 
 //saves to local storage 
 function savecity() {
@@ -62,6 +69,25 @@ function compareArrays(arr1, arr2) {
     }   
 }
 
+//print searched cities to navbar
+function printCities(){
+    $('#searchedCityList').empty()
+    for(var i = 0; i < savedCities.length; i++) {
+        var aSavedCity = $('<button class="pageLinks savedCity"></button>').text(savedCities[i])
+        var listItem = $('<li></li>')
+        aSavedCity.appendTo(listItem)
+        listItem.appendTo('#searchedCityList')
+    
+    }
+}
+
+getCities()
+printCities()
+
+$('button.savedCity').on('click', function(){
+    $('#location').val(this.textContent) 
+})
+
 //makes zomato call 2 times each time displaying the next 20 results so 40 results total
 function zomatoCall() {
     var locSearch =  "&lat=" + latitude + "&lon=" + longitude
@@ -76,8 +102,8 @@ function zomatoCall() {
                 "user-key": zomatoKey
             }
         }).then(function(response) {
+            
             for (var i = 0; i < response.restaurants.length; i++){
-                    
                 //create a data object for each resaurant
                 var restuarantData = {
                     name: response.restaurants[i].restaurant.name,
@@ -90,7 +116,8 @@ function zomatoCall() {
                     photo: response.restaurants[i].restaurant.photos_url,
                     ratings: [response.restaurants[i].restaurant.aggregate_rating, response.restaurants[i].rating_text],
                     latitude: Number(response.restaurants[i].restaurant.location.latitude),
-                    longitude: Number(response.restaurants[i].restaurant.location.longitude)
+                    longitude: Number(response.restaurants[i].restaurant.location.longitude),
+                    address: response.restaurants[i].restaurant.location.address
                     }
                 zomatoData.push(restuarantData)
                 zomatoArray.push(response.restaurants[i].restaurant.name)      
@@ -106,9 +133,7 @@ function initMap() {
     var map = new google.maps.Map(document.getElementById('map'), {
         center: {lat: latitude, lng: longitude},
         styles: stylesArray,
-
         zoom: 15
-
     });
     //creates search params
     var request = {
@@ -144,13 +169,15 @@ function initMap() {
         })
         google.maps.event.addListener(marker, 'click', function(){
             infoWindow.setContent(
+            "<div class='restaurantInfo'>" +
                "<p>" + place.name + "</p>" +
-               "<p>" + place.cost + "</p>" +
+               "<p>" + place.address + "</p>" +
+               "<p>" + "Average Cost for Two: " + place.cost + "</p>" +
                "<p>" + place.cuisines + "</p>" +
                "<p>" + place.highlights + "</p>" +
-               "<p>" + place.phone + "</p>" +
-               "<p>" + place.timings + "</p>" +
-               "<p>this is a place to display all info about a resaurant</p>")
+               "<p>" + "Phone: " + place.phone + "</p>" +
+               "<p>" + place.timings + "</p>") +
+            "</div>"
             infoWindow.open(map, this)
         })
     }
@@ -167,10 +194,8 @@ function initMap() {
         //when a marker is clicked
         google.maps.event.addListener(marker, 'click', function(){
             //display info
-            infoWindow.setContent(place.name + "<p>" + "<p>" + place.vicinity + "</p>" +
-                place.business_status + "</p>" + 
-                "<p>" + "Rating: " + place.rating + "</p>" +
-                "<p>this is a place to display all info about a resaurant</p>")
+            infoWindow.setContent(place.name + "<p>" + "<p>" + place.vicinity + "</p>")
+                
             infoWindow.open(map, this)
         })
     }
@@ -201,7 +226,7 @@ $('#search').on('click', function(e){
 
             //scroll to map
             $('html').animate({
-                scrollTop: $('.scroll').offset().top - 80
+                scrollTop: $('.scroll').offset().top - 70
             }, 800);
             console.log(zomatoData)
             restaurantsArray = []
@@ -213,8 +238,11 @@ $('#search').on('click', function(e){
             }
             foodType = $('#foodType').val().trim()
             console.log(foodType)
-            savedCities.push(aPlace)
+
+    
+            saveConditions()
             savecity()
+            printCities()
             $.ajax({
                 url: mapsURL + aPlace + GoogleKey,
                 method: "get"

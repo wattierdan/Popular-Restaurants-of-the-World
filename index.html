@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/css/foundation.min.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
   
     <link rel="stylesheet" type="text/css" href="assets/style.css">
     <title>HomePage</title>
@@ -13,7 +15,7 @@
 
     <nav class="top-bar topbar-responsive">
         <div class="top-bar-title">
-          <span data-responsive-toggle="topbar-responsive" data-hide-for="large">
+          <span data-responsive-toggle="topbar-responsive" data-hide-for="xxlarge">
             <button class="menu-icon" type="button" data-toggle></button>
           </span>
           <a class="topbar-responsive-logo" href="#"><strong>PROW</strong></a>
@@ -21,8 +23,19 @@
         <div id="topbar-responsive" class="topbar-responsive-links">
           <div class="top-bar-right">
             <ul class="menu simple vertical medium-horizontal">
-              <li><a class="pageLinks" href="#home">Home</a></li>
-              <li><a class="pageLinks" href="#reviews">Reviews</a></li>
+              <li><a class="pageLinks mainLinks"  href="#home">Home</a></li>
+              <li><a class="pageLinks mainLinks" href="#reviews">Reviews</a></li>
+              <ul class="dropdown menu" data-dropdown-menu>
+                <li>
+                  <a class="pageLinks searchedCities" href="#">Searched Cites</a>
+                  <ul class="menu vertical">
+                    <div id="searchedCityList">
+                    
+                    </div>
+                  </ul>
+                </li>
+              </ul>
+              
               <li>
                 <form>
                     <input id="location" type="text" placeholder="city/location">
@@ -45,35 +58,21 @@
     <div id="home" class="backgroundImage-1"></div>
     <div id="map" class="scroll"></div>
 
-    <div id="container"
-    <h1 id="reviews">Reviews</h1>
-    <div class="backgroundImage-2">
-    <div class ="reviewbox"
-    <form>
-           <div class = "medium-4 columns">
-              <label>Date & time of visit <input type = "datetime-local"></label>
-           </div>
-        </div>
 
 
+    <div class="backgroundImage-2"></div>
 
-        <div class = "row">
-           <div class = "medium-12 columns">
-              <label>User Review
-                 <textarea>Tell us about your experience</textarea>
-              </label>
-              <button id="Submit" type="submit">Submit</button>
-           </div>
-        </div>
-     </form>
-    </div>
-     </div>
-    </div>
-     <script>
-        $(document).ready(function() {
-           $(document).foundation();
-        })
-    </script>
+    <form class ="reviewbox">
+        
+        <label>Date & time of visit</label>
+            <input type = "datetime-local">
+        <label>User Review</label>
+            <textarea>Tell us about your experience</textarea>
+        <button id="Submit" type="submit">Submit</button>   
+    </form>
+     
+    
+     
 
 
     <!--google maps with places library-->
