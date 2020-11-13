@@ -32,15 +32,12 @@ var stylesArray = [
         elementType: "labels.text.fill",
         stylers: [{ visibility: "on" }],
       },
-  ]
+]
 
 function saveConditions() {
-  
         if (savedCities.indexOf(aPlace) == -1) {
-
             savedCities.push(aPlace)
         }
-
 }
 
 //saves to local storage 
@@ -77,9 +74,9 @@ function printCities(){
         var listItem = $('<li></li>')
         aSavedCity.appendTo(listItem)
         listItem.appendTo('#searchedCityList')
-    
     }
 }
+
 
 getCities()
 printCities()
@@ -206,8 +203,6 @@ function initMap() {
             displayZomatoMarker()
     }, 2000)
 
-    
-
     callback(results, status)
 
     function displayZomatoMarker() {
@@ -223,7 +218,6 @@ function initMap() {
 //on click user input geocoded and latidtude and longitude variables reset
 $('#search').on('click', function(e){
             e.preventDefault()
-
             //scroll to map
             $('html').animate({
                 scrollTop: $('.scroll').offset().top - 70
@@ -237,9 +231,6 @@ $('#search').on('click', function(e){
                 return
             }
             foodType = $('#foodType').val().trim()
-            console.log(foodType)
-
-    
             saveConditions()
             savecity()
             printCities()
