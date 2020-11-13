@@ -45,12 +45,37 @@
     <div id="home" class="backgroundImage-1"></div>
     <div id="map" class="scroll"></div>
 
+    <div id="container"
     <h1 id="reviews">Reviews</h1>
-    <div class="backgroundImage-2"></div>
+    <div class="backgroundImage-2">
+    <div class ="reviewbox"
+    <form>
+           <div class = "medium-4 columns">
+              <label>Date & time of visit <input type = "datetime-local"></label>
+           </div>
+        </div>
 
 
 
-    
+        <div class = "row">
+           <div class = "medium-12 columns">
+              <label>User Review
+                 <textarea>Tell us about your experience</textarea>
+              </label>
+              <button id="Submit" type="submit">Submit</button>
+           </div>
+        </div>
+     </form>
+    </div>
+     </div>
+    </div>
+     <script>
+        $(document).ready(function() {
+           $(document).foundation();
+        })
+    </script>
+
+
     <!--google maps with places library-->
     <script defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDuD7uhRf2B88H4rdS3LPR7JYbZSUlQnCI&libraries=places&callback=initMap"></script>
     <!-- jquery -->
