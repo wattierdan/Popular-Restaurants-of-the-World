@@ -12,4 +12,5 @@ As a traveler, I want to be able to search a location for surrounding restaurant
 * user searched cities are saved to local storage and can be accessed via the navbar 
 * when user inputs a location and food type the page will scroll to an embedded map with markers displaying local resturants that meet search criteria
 * when user clicks on map marker info about the restaurant will be displayed aswell as a get directions link
+* [link](https://wattierdan.github.io/Popular-Restaurants-of-the-World/) to deployed application
 ![screenshot](./assets/imgs/screenshot.png)
