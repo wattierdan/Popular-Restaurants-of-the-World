@@ -19,7 +19,6 @@ var zomatoArray = []
 var results
 var zomatoData = []
 var image = "./assets/imgs/Restaurantforkandknifefreeicon2.png"
-var savedCities = []
 
 //styles for map
 var stylesArray = [
@@ -35,9 +34,8 @@ var stylesArray = [
       },
   ]
 
-getCities()
 function saveConditions() {
-
+  
         if (savedCities.indexOf(aPlace) == -1) {
 
             savedCities.push(aPlace)
@@ -58,6 +56,7 @@ function getCities() {
         savedCities = []
     }
 }  
+
 //compare results and if duplicate delete from arr2
 function compareArrays(arr1, arr2) {
     console.log(arr1.length, arr2.length)
@@ -78,7 +77,7 @@ function printCities(){
         var listItem = $('<li></li>')
         aSavedCity.appendTo(listItem)
         listItem.appendTo('#searchedCityList')
-
+    
     }
 }
 
@@ -103,9 +102,8 @@ function zomatoCall() {
                 "user-key": zomatoKey
             }
         }).then(function(response) {
-
+            
             for (var i = 0; i < response.restaurants.length; i++){
-
                 //create a data object for each resaurant
                 var restuarantData = {
                     name: response.restaurants[i].restaurant.name,
@@ -118,7 +116,6 @@ function zomatoCall() {
                     photo: response.restaurants[i].restaurant.photos_url,
                     ratings: [response.restaurants[i].restaurant.aggregate_rating, response.restaurants[i].rating_text],
                     latitude: Number(response.restaurants[i].restaurant.location.latitude),
-                    longitude: Number(response.restaurants[i].restaurant.location.longitude)
                     longitude: Number(response.restaurants[i].restaurant.location.longitude),
                     address: response.restaurants[i].restaurant.location.address
                     }
@@ -130,14 +127,13 @@ function zomatoCall() {
         })      
     }
 }
+
 //map loads
 function initMap() {
     var map = new google.maps.Map(document.getElementById('map'), {
         center: {lat: latitude, lng: longitude},
         styles: stylesArray,
-
         zoom: 15
-
     });
     //creates search params
     var request = {
@@ -175,20 +171,17 @@ function initMap() {
             infoWindow.setContent(
             "<div class='restaurantInfo'>" +
                "<p>" + place.name + "</p>" +
-               "<p>" + place.cost + "</p>" +
                "<p>" + place.address + "</p>" +
                "<p>" + "Average Cost for Two: " + place.cost + "</p>" +
                "<p>" + place.cuisines + "</p>" +
                "<p>" + place.highlights + "</p>" +
-               "<p>" + place.phone + "</p>" +
-               "<p>" + place.timings + "</p>" +
-               "<p>this is a place to display all info about a resaurant</p>")
                "<p>" + "Phone: " + place.phone + "</p>" +
                "<p>" + place.timings + "</p>") +
             "</div>"
             infoWindow.open(map, this)
         })
     }
+
     //creates a new google marker 
     function createMarker(place) {
         var placeLoc = place.geometry.location 
@@ -201,22 +194,22 @@ function initMap() {
         //when a marker is clicked
         google.maps.event.addListener(marker, 'click', function(){
             //display info
-            infoWindow.setContent(place.name + "<p>" + "<p>" + place.vicinity + "</p>" +
-                place.business_status + "</p>" + 
-                "<p>" + "Rating: " + place.rating + "</p>" +
-                "<p>this is a place to display all info about a resaurant</p>")
             infoWindow.setContent(place.name + "<p>" + "<p>" + place.vicinity + "</p>")
-
+                
             infoWindow.open(map, this)
         })
     }
+
     zomatoCall()
         //time out to wait for return of zomato call
     setTimeout(function(){
             displayZomatoMarker()
     }, 2000)
+
     
+
     callback(results, status)
+
     function displayZomatoMarker() {
         //display zomato marker on map
         for(i = 0; i < zomatoData.length; i++) {
@@ -226,13 +219,13 @@ function initMap() {
         zomatoData = []
     } 
 }
+
 //on click user input geocoded and latidtude and longitude variables reset
 $('#search').on('click', function(e){
             e.preventDefault()
 
             //scroll to map
             $('html').animate({
-                scrollTop: $('.scroll').offset().top - 80
                 scrollTop: $('.scroll').offset().top - 70
             }, 800);
             console.log(zomatoData)
@@ -245,9 +238,8 @@ $('#search').on('click', function(e){
             }
             foodType = $('#foodType').val().trim()
             console.log(foodType)
-            savedCities.push(aPlace)
 
-
+    
             saveConditions()
             savecity()
             printCities()
