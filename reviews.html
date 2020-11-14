@@ -23,17 +23,36 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
     <script type = "text/javascript">
         //variables
-        
         var submittedReview = []
+        var counter = 0;
+        
+        for(var i = 0;i<counter;i++){
+        var submittedReview[] = JSON.parse(localStorage.getItem('submittedReview'));
+        submittedReview[1].text
+
+        }
+    
+        
+       
+        
         //function for submitting new review
         $("#submit-review").on("click", function(event){
             event.preventDefault();
+            var reviewObject = {}
             
             //get review from input box
-            submittedReview= $('<li></li>').addClass('rvw')
-            submittedReview.text($("#review-input").val());
-            submittedReview.attr('id','new-review');
-            submittedReview.appendTo('ol.review-list');
+            
+            
+            var submittedReviewItem= $('<li></li>').addClass('rvw')
+            submittedReviewItem.text($("#review-input").val());
+            submittedReviewItem.attr('id','new-review');
+            submittedReviewItem.appendTo('ol.review-list');
+            reviewObject[counter] =$("#review-input").val()
+            submittedReview.push(reviewObject)
+            localStorage.setItem('submittedReview',JSON.stringify(submittedReview));
+            counter++
+            
+            
             //$("#review-list").append("<li" + submittedReview[i] + "</li>");
             
             
