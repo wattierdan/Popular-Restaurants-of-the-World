@@ -101,10 +101,14 @@ function printCities(){
 
 function savedCitySearch() {
     $('button.savedCity').on('click', function(){
-    console.log("test")
-    $('#location').val(this.textContent) 
-})
+        $('html').animate({
+            scrollTop: $('.scroll').offset().top - 70
+        }, 800);
+        console.log("test")
+        $('#location').val(this.textContent) 
+    })
 }
+
 
 
 getLocation()
