@@ -12,6 +12,8 @@ var foodType = ""
 //starting lat and lng is sacramento we can change to user location later on
 var latitude = 38.5816
 var longitude = -121.4944
+var userLat = ""
+var userLng = ""
 //globally delcaring variables
 var infoWindow
 var restaurantsArray = []
@@ -19,6 +21,7 @@ var zomatoArray = []
 var results
 var zomatoData = []
 var image = "./assets/imgs/Restaurantforkandknifefreeicon2.png"
+var getDirectons = "https://www.google.com/maps/dir/"
 
 //styles for map
 var stylesArray = [
@@ -41,6 +44,21 @@ function saveConditions() {
             savedCities.push(aPlace)
         }
 
+}
+
+
+//get users location
+function getLocation() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(changePosition);
+  } 
+}
+
+//changes lat and lng
+function changePosition(position) {
+  userLat = position.coords.latitude 
+  userLng = position.coords.longitude
+  console.log(userLat, userLng)
 }
 
 //saves to local storage 
@@ -81,6 +99,8 @@ function printCities(){
     }
 }
 
+
+getLocation()
 getCities()
 printCities()
 
@@ -171,7 +191,8 @@ function initMap() {
             infoWindow.setContent(
             "<div class='restaurantInfo'>" +
                "<p>" + place.name + "</p>" +
-               "<p>" + place.address + "</p>" +
+               "<p>" + place.address + "</p>" + 
+               "<a  target='_blank' href=" + '"' + getDirectons + userLat + userLng + "/" + place.address + '"' + ">" + "Get Directions" + "</a>" +
                "<p>" + "Average Cost for Two: " + place.cost + "</p>" +
                "<p>" + place.cuisines + "</p>" +
                "<p>" + place.highlights + "</p>" +
@@ -194,7 +215,11 @@ function initMap() {
         //when a marker is clicked
         google.maps.event.addListener(marker, 'click', function(){
             //display info
-            infoWindow.setContent(place.name + "<p>" + "<p>" + place.vicinity + "</p>")
+            infoWindow.setContent(
+                place.name + "<p>" + "<p>" + 
+                place.vicinity + "</p>" + 
+                "<a  target='_blank' href=" + '"' + getDirectons + userLat + "+" + userLng + "/" + place.vicinity + '"' + ">" + "Get Directions" + "</a>" 
+                )
                 
             infoWindow.open(map, this)
         })
