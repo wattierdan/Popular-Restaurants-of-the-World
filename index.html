@@ -11,19 +11,26 @@
 </head>
 <body>
     <header class="top-bar">    
-        <div class="top-bar-left">
+        <div class="c">
             <ul class="dropdown menu" data-dropdown-menu>
               <li class="menu-text">Popular Restaurants of the World</li>
                 <li><a class="pageLinks" href="#home">Home</a></li>
                 <li><a class="pageLinks" href="#reviews">Reviews</a></li>
             </ul>
-       </div>
+               <!--
+               <p><a class="pageLinks" id="zomatoLink" visibility=hidden
+                style="text-align:right;" href="https://www.zomato.com">Photos and Menus</a></p>
+               --> 
+           <!---->
+   </div>
        <div class="top-bar-right">
            <form>
                <input id="location" type="text" placeholder="city/location">
                <input id="foodType" type="text" placeholder="type of food">
-               <button id="search" href=".results" type="submit">search</button>
-           </form>
+               <button id="search" href="https://www.zomato.com" type="submit">search</button>
+               <p><a class="pageLinks" id="zomatoLink" visibility=hidden
+                    href="https://www.zomato.com">Photos and Menus</a></p>
+            </form>
        </div>
     </header>
 
@@ -39,9 +46,8 @@
     <h1 id="reviews">Reviews</h1>
     <div class="backgroundImage-2"></div>
 
-
-
-
+    <div class="card" style="margin-top: 50px">
+ 
     <!--google maps with places library-->
     <script defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDuD7uhRf2B88H4rdS3LPR7JYbZSUlQnCI&libraries=places&callback=initMap"></script>
     

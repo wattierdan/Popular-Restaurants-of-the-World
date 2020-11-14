@@ -19,6 +19,7 @@ var zomatoArray = []
 var results
 var zomatoData = []
 var image = "./assets/imgs/Restaurantforkandknifefreeicon2.png"
+var imageZ = "./assets/imgs/Restaurantforkandknifefreeicon2Z.png"
 var savedCities = []
 //styles for map
 var stylesArray = [
@@ -55,7 +56,7 @@ function compareArrays(arr1, arr2) {
     console.log(arr1.length, arr2.length)
     for (var i = 0; i < arr2.length; i++){
         for (var j = 0; j < arr2.length; j++) {
-                if(arr1[i] === arr2[j].name){ 
+            if(arr1[i] === arr2[j].name){ 
                     arr2.splice(j, 1)   
                }
         }
@@ -91,18 +92,19 @@ function zomatoCall() {
                     ratings: [response.restaurants[i].restaurant.aggregate_rating, response.restaurants[i].rating_text],
                     latitude: Number(response.restaurants[i].restaurant.location.latitude),
                     longitude: Number(response.restaurants[i].restaurant.location.longitude)
-                    }
+                }
                 zomatoData.push(restuarantData)
                 zomatoArray.push(response.restaurants[i].restaurant.name)      
             }
-            compareArrays(restaurantsArray, zomatoData)
-            
-        })      
+           compareArrays(restaurantsArray, zomatoArray)
+        })   
     }
 }
 
 //map loads
 function initMap() {
+    document.getElementById("zomatoLink").style.visibility = "hidden"
+
     var map = new google.maps.Map(document.getElementById('map'), {
         center: {lat: latitude, lng: longitude},
         styles: stylesArray,
@@ -117,7 +119,6 @@ function initMap() {
         type: ['restaurant'],
         keyword: foodType
     };
-    
     infoWindow = new google.maps.InfoWindow()
     
     //google places call
@@ -140,8 +141,9 @@ function initMap() {
         var marker = new google.maps.Marker({
             map: map,
             position: {lat: place.latitude, lng: place.longitude},
-            icon: image
-        })
+            icon: imageZ
+})
+
         google.maps.event.addListener(marker, 'click', function(){
             infoWindow.setContent(
                "<p>" + place.name + "</p>" +
@@ -152,6 +154,9 @@ function initMap() {
                "<p>" + place.timings + "</p>" +
                "<img src=" + place.photo + ">" +
                "<p>this is a place to display all info about a resaurant</p>")
+            //console.log("place.menu", place.menu)
+            document.getElementById("zomatoLink").href = place.menu
+            document.getElementById("zomatoLink").style.visibility = "visible"
             infoWindow.open(map, this)
         })
     }
@@ -167,6 +172,8 @@ function initMap() {
         
         //when a marker is clicked
         google.maps.event.addListener(marker, 'click', function(){
+            document.getElementById("zomatoLink").style.visibility = "hidden"
+
             //display info
             infoWindow.setContent(place.name + "<p>" + "<p>" + place.vicinity + "</p>" +
                 place.business_status + "</p>" + 
@@ -187,8 +194,7 @@ function initMap() {
     callback(results, status)
 
     function displayZomatoMarker() {
-        //display zomato marker on map
-        for(i = 0; i < zomatoData.length; i++) {
+       for(i = 0; i < zomatoData.length; i++) {
             zomatoMarker(zomatoData[i])
         }
         //reset zomato data
@@ -199,6 +205,8 @@ function initMap() {
 //on click user input geocoded and latidtude and longitude variables reset
 $('#search').on('click', function(e){
             e.preventDefault()
+
+            document.getElementById("zomatoLink").style.visibility = "hidden"
 
             //scroll to map
             $('html').animate({
