@@ -55,6 +55,18 @@ li {
  
 }
 
+
+.restaurantInfo {
+  font-size: 18px;
+  background-color: rgba(255, 255, 0, 0.151);
+  border-radius: 5px;
+  
+  margin: 0;
+  padding: 10px;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+
+}
+
 #searchedCityList {
   text-align: left;
 }
@@ -99,7 +111,6 @@ strong:hover {
 strong {
   font-size: 34px;
 }
-
 
 /*styles home page slogan*/
 .slogan-box {
@@ -190,20 +201,7 @@ margin-left: auto;
 text-align: center;z-index: 2;
 }
 
-/*styles reviews header*/
-#reviews {
-  font-size: 2.5vw;
-  color: white;
-  font-weight: bold;
-  border-radius: 5px;
-  text-align: center;
-  position: absolute;
-  padding-top: 100px;
-  width: 100%;
-  z-index: 90;
-}
-
-
+/*styles review form*/
 .reviewbox {
   text-align: center;
   position: absolute;

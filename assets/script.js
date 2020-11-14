@@ -99,14 +99,18 @@ function printCities(){
     }
 }
 
+function savedCitySearch() {
+    $('button.savedCity').on('click', function(){
+    console.log("test")
+    $('#location').val(this.textContent) 
+})
+}
+
 
 getLocation()
 getCities()
 printCities()
-
-$('button.savedCity').on('click', function(){
-    $('#location').val(this.textContent) 
-})
+savedCitySearch()
 
 //makes zomato call 2 times each time displaying the next 20 results so 40 results total
 function zomatoCall() {
@@ -122,7 +126,6 @@ function zomatoCall() {
                 "user-key": zomatoKey
             }
         }).then(function(response) {
-            
             for (var i = 0; i < response.restaurants.length; i++){
                 //create a data object for each resaurant
                 var restuarantData = {
@@ -143,7 +146,6 @@ function zomatoCall() {
                 zomatoArray.push(response.restaurants[i].restaurant.name)      
             }
             compareArrays(restaurantsArray, zomatoData)
-            
         })      
     }
 }
@@ -182,6 +184,12 @@ function initMap() {
     
     //create a new zomato marker    
     function zomatoMarker(place){ 
+        var highlights = []
+        for (var i = 0; i < place.highlights.length; i++){
+           var highlight = " " + place.highlights[i] 
+           highlights.push(highlight)
+        }
+        console.log(highlights)
         var marker = new google.maps.Marker({
             map: map,
             position: {lat: place.latitude, lng: place.longitude},
@@ -190,14 +198,14 @@ function initMap() {
         google.maps.event.addListener(marker, 'click', function(){
             infoWindow.setContent(
             "<div class='restaurantInfo'>" +
-               "<p>" + place.name + "</p>" +
+               "<h4>" + place.name + "</h4>" +
                "<p>" + place.address + "</p>" + 
                "<p>" + "<a  target='_blank' href=" + '"' + 
                getDirectons + userLat + userLng + "/" + place.address + '"' + ">" + 
                "Get Directions" + "</a>" + "</p>" +
                "<p>" + "Average Cost for Two: " + place.cost + "</p>" +
-               "<p>" + place.cuisines + "</p>" +
-               "<p>" + place.highlights + "</p>" +
+               "<p>" + place.cuisines + "</p>" +               
+               "<p>" + "Highlights: " + highlights + "</p>" +
                "<p>" + "Phone: " + place.phone + "</p>" +
                "<p>" + place.timings + "</p>") +
             "</div>"
@@ -218,9 +226,13 @@ function initMap() {
         google.maps.event.addListener(marker, 'click', function(){
             //display info
             infoWindow.setContent(
-                place.name + "<p>" + "<p>" + 
-                place.vicinity + "</p>" + 
-                "<a  target='_blank' href=" + '"' + getDirectons + userLat + "+" + userLng + "/" + place.vicinity + '"' + ">" + "Get Directions" + "</a>" 
+                "<div class='restaurantInfo'>" +
+                "<h4>" + place.name + "</h4>" + 
+                "<p>" + place.vicinity + "</p>" + 
+                "<a  target='_blank' href=" + '"' + 
+                getDirectons + userLat + "+" + userLng + "/" + place.vicinity 
+                + '"' + ">" + "Get Directions" + "</a>" +
+                "</div>"
                 )
                 
             infoWindow.open(map, this)
@@ -266,10 +278,10 @@ $('#search').on('click', function(e){
             foodType = $('#foodType').val().trim()
             console.log(foodType)
 
-    
             saveConditions()
             savecity()
             printCities()
+
             $.ajax({
                 url: mapsURL + aPlace + GoogleKey,
                 method: "get"
@@ -277,6 +289,8 @@ $('#search').on('click', function(e){
                 latitude = response.results[0].geometry.location.lat
                 longitude = response.results[0].geometry.location.lng
                 //updates map with new lat lng and new markers
-                initMap()     
+                initMap()   
+                savedCitySearch() 
             });
 });
+
