@@ -205,7 +205,7 @@ function initMap() {
                "<h4>" + place.name + "</h4>" +
                "<p>" + place.address + "</p>" + 
                "<p>" + "<a  target='_blank' href=" + '"' + 
-               getDirectons + userLat + userLng + "/" + place.address + '"' + ">" + 
+               getDirectons + userLat + "+" + userLng + "/" + place.address + '"' + ">" + 
                "Get Directions" + "</a>" + "</p>" +
                "<p>" + "Average Cost for Two: " + place.cost + "</p>" +
                "<p>" + place.cuisines + "</p>" +               
