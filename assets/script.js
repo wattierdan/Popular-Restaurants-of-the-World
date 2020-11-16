@@ -38,12 +38,9 @@ var stylesArray = [
   ]
 
 function saveConditions() {
-  
         if (savedCities.indexOf(aPlace) == -1) {
-
             savedCities.push(aPlace)
         }
-
 }
 
 
@@ -200,6 +197,7 @@ function initMap() {
             icon: image
         })
         google.maps.event.addListener(marker, 'click', function(){
+            console.log(place)
             infoWindow.setContent(
             "<div class='restaurantInfo'>" +
                "<h4>" + place.name + "</h4>" +
@@ -207,6 +205,7 @@ function initMap() {
                "<p>" + "<a  target='_blank' href=" + '"' + 
                getDirectons + userLat + "+" + userLng + "/" + place.address + '"' + ">" + 
                "Get Directions" + "</a>" + "</p>" +
+               "<p>" + "<a target='_blank' href=" + place.menu + ">" + "Menu" + "</a>" +
                "<p>" + "Average Cost for Two: " + place.cost + "</p>" +
                "<p>" + place.cuisines + "</p>" +               
                "<p>" + "Highlights: " + highlights + "</p>" +
@@ -229,10 +228,12 @@ function initMap() {
         //when a marker is clicked
         google.maps.event.addListener(marker, 'click', function(){
             //display info
+            console.log(place)
             infoWindow.setContent(
                 "<div class='restaurantInfo'>" +
                 "<h4>" + place.name + "</h4>" + 
                 "<p>" + place.vicinity + "</p>" + 
+                "<p> Rating: " + place.rating + "</p>" +
                 "<a  target='_blank' href=" + '"' + 
                 getDirectons + userLat + "+" + userLng + "/" + place.vicinity 
                 + '"' + ">" + "Get Directions" + "</a>" +
