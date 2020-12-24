@@ -1,16 +1,72 @@
-# Popular Restaurants of the World
 
-USER STORY:
+
+
+## Popular Restaurants of the Wold
 
 As a traveler, I want to be able to search a location for surrounding restaurants so that I can find a local establishment to fit my needs.
 
 
+## Table of Contents
 
-* uses Foundation css framework
-* application utilizes Zomato, and Google API's to retreve restaurant data
-* user can search restaurants around the world based on location and food type
-* user searched cities are saved to local storage and can be accessed via the navbar 
-* when user inputs a location and food type the page will scroll to an embedded map with markers displaying local resturants that meet search criteria
-* when user clicks on map marker info about the restaurant will be displayed aswell as a get directions link
-* [link](https://wattierdan.github.io/Popular-Restaurants-of-the-World/) to deployed application
+* [Description](#Description) 
+* [Usage](#Usage) 
+* [License](#license) 
+* [Questions](#Questions)
+
 ![screenshot](./assets/imgs/screenshot.png)
+
+
+  
+## Description 
+
+ PROW utilizes the Foundation css framework and a combination of the Zomato and Google API's to bring you any easy and functional user interface. 
+ 
+ Retrieve restaurant data from around the world simple by using the fixed search bar. 
+ 
+ All of your previously searched cities will be saved to local storage and can be accessed through the searched cities tab. 
+ 
+ We hope you enjoy our app and if you have please feel free to reach out to one of the contacts below!
+ 
+
+[link](https://wattierdan.github.io/Popular-Restaurants-of-the-World/) to deployed application
+
+## Usage 
+  
+Use the navagation bar at the top of the page to search restaurants anywhere in the world by location name and keyword.
+
+  ## License
+
+  MIT License.
+  
+
+
+
+  ## Questions?
+  Questions? please contact:
+
+ 
+  GitHub: 
+
+  [wattierdan](https://github.com/wattierdan)
+
+  [Rinzler8806](https://github.com/Rinzler8806)
+
+  [keithsutton2324](https://github.com/keithsutton2324)
+
+  [gstinsonjr42](https://github.com/gstinsonjr42)
+
+  Email:
+
+  wattierdan@live.com
+
+  shane.rogers916@gmail.com
+
+  suttonk@sbcglobal.net
+
+
+  gstinsonjr17@gmail.com
+
+
+
+
+
