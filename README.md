@@ -3,6 +3,8 @@
 
 ## Popular Restaurants of the Wold
 
+[![License](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
 As a traveler, I want to be able to search a location for surrounding restaurants so that I can find a local establishment to fit my needs.
 
 
